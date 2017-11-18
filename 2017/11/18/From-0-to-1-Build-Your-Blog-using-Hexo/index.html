@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>From 0 to 1: Build Your Blog using Hexo | Xiaoxing Ye&#39;s Farmland</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Date: November 18, 2017 Category: Tutorials  Want to have your owned blog and to save your ideas? You need a blog. But the question comes, what kind of blogging">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From 0 to 1: Build Your Blog using Hexo">
+<meta property="og:url" content="http://xiaoxing.us/2017/11/18/From-0-to-1-Build-Your-Blog-using-Hexo/index.html">
+<meta property="og:site_name" content="Xiaoxing Ye&#39;s Farmland">
+<meta property="og:description" content="Date: November 18, 2017 Category: Tutorials  Want to have your owned blog and to save your ideas? You need a blog. But the question comes, what kind of blogging software do you need? I have tried many">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-11-18T17:34:59.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="From 0 to 1: Build Your Blog using Hexo">
+<meta name="twitter:description" content="Date: November 18, 2017 Category: Tutorials  Want to have your owned blog and to save your ideas? You need a blog. But the question comes, what kind of blogging software do you need? I have tried many">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiaoxing Ye&#39;s Farmland" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiaoxing Ye&#39;s Farmland</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Blog for everything</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://xiaoxing.us"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-From-0-to-1-Build-Your-Blog-using-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/18/From-0-to-1-Build-Your-Blog-using-Hexo/" class="article-date">
+  <time datetime="2017-11-18T15:13:51.000Z" itemprop="datePublished">2017-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      From 0 to 1: Build Your Blog using Hexo
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Date: November 18, 2017</p>
+<p>Category: Tutorials</p>
+<hr>
+<p>Want to have your owned blog and to save your ideas? You need a blog. But the question comes, what kind of blogging software do you need?</p>
+<p>I have tried many blogging softwares, such as WordPress and Ghost. They both require to be installed on a server but I don’t want to maintain a server (too lazy). So I come to Hexo, a static blog framework.</p>
+<p>In this blog, I will mark down some important steps to setup a Hexo instance locally and to deploy it on GitHub Pages (possibly with CloudFlare or Netlify), with the assumption of using an newly-installed macOS High Sierra.</p>
+<h1 id="Install-Packages"><a href="#Install-Packages" class="headerlink" title="Install Packages"></a>Install Packages</h1><h2 id="Install-Homebrew"><a href="#Install-Homebrew" class="headerlink" title="Install Homebrew"></a>Install Homebrew</h2><p>Homebrew is a package manager for macOS. It will simplify many things such as finding packages and installing dependencies. Its official website is <a href="https://brew.sh" target="_blank" rel="noopener">https://brew.sh</a> .</p>
+<p>The installation is very simple — just paste this line at a Terminal prompt:</p>
+<pre><code>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p>It will also install Command Line Tools (CLT) for Xcode. This is required for compiling source codes.</p>
+<p>After installing homebrew, we can run <code>brew doctor</code> to see if it is successfully installed and able to use.</p>
+<h2 id="Check-if-Git-is-installed"><a href="#Check-if-Git-is-installed" class="headerlink" title="Check if Git is installed"></a>Check if Git is installed</h2><p>To make sure git is installed, we can run <code>command -v git</code> . If it doesn’t complain that “command not found”, things are fine.</p>
+<p>If, unfortunately, it complains, check if Homebrew is successfully installed, and try <code>brew install git</code> to see if it can fix.</p>
+<h2 id="Install-Node-JS"><a href="#Install-Node-JS" class="headerlink" title="Install Node.JS"></a>Install Node.JS</h2><p>Since Hexo itself is a Node.js package, we will need to install Node.js first. Node.js itself updates very frequently, and the Hexo recommends using NVM.</p>
+<p>NVM, short for <em>Node Version Manager</em> , is a script to manage Node.js versions. It can also be installed using a single line:</p>
+<pre><code>$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+</code></pre><p>(Note: Please check <a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a> to see if there is any update to NVM install script.)</p>
+<p>Once NVM is installed, restart the Terminal then install a stable version of Node.js:</p>
+<pre><code>$ nvm install stable
+</code></pre><h2 id="Install-Hexo"><a href="#Install-Hexo" class="headerlink" title="Install Hexo"></a>Install Hexo</h2><p>You are finally here. Just install Hexo with npm:</p>
+<pre><code>$ npm install -g hexo-cli
+</code></pre><p>It will install a global instance of Hexo in your home directory. </p>
+<h2 id="Use-a-Mirror-for-npm-Maybe-for-Chinese-Users-Only"><a href="#Use-a-Mirror-for-npm-Maybe-for-Chinese-Users-Only" class="headerlink" title="Use a Mirror for npm (Maybe for Chinese Users Only)"></a>Use a Mirror for npm (Maybe for Chinese Users Only)</h2><p>Emmm… As we all know, the network in China is undergoing some difficulties. If you fail to fetch packages from official registry (registry.npmjs.org) using NPM, you may try to use one of the mirrors in China.</p>
+<p>Here, I recommend you to use the Taonpm (Taobao NPM Mirror). This is run by Alibaba so the speed and availability can be guaranteed.</p>
+<p>There are many ways to use it. For example, use the smart-npm package instead of npm, by running <code>npm install --global smart-npm --registry=https://registry.npm.taobao.org/</code> . Or alias a new command:</p>
+<pre><code>$ alias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \
+--cache=$HOME/.npm/.cache/cnpm \
+--disturl=https://npm.taobao.org/dist \
+--userconfig=$HOME/.cnpmrc&quot;
+</code></pre><p>(Reference: <a href="http://www.uedbox.com/npm-install-slow-solution/" target="_blank" rel="noopener">http://www.uedbox.com/npm-install-slow-solution/</a> )</p>
+<h1 id="Initialize-Your-Blog-Locally"><a href="#Initialize-Your-Blog-Locally" class="headerlink" title="Initialize Your Blog Locally"></a>Initialize Your Blog Locally</h1><p>Now you have installed Hexo, it is time to initialise Hexo. Simply run it (replacing <folder> with your desired target):</folder></p>
+<pre><code>$ hexo init &lt;folder&gt;
+$ cd &lt;folder&gt;
+</code></pre><p>This creates a basic project folder, which looks like:</p>
+<pre><code>_config.yml # Site configuration file
+package-lock.json # You may see this file which is used by npm
+package.json # Application dependencies 
+node_modules # Here store Node.js Modules
+scaffolds # When you create a new post, Hexo bases the new file on the scaffold
+source # Where site contents locate
+themes # Theme folder for static website generation
+</code></pre><h2 id="Configure-Your-New-Blog"><a href="#Configure-Your-New-Blog" class="headerlink" title="Configure Your New Blog"></a>Configure Your New Blog</h2><p>You are having a fresh Hexo instance. Why not customize it? You can modify most site settings in <code>_config.yml</code> .</p>
+<p>Please refer to <a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">https://hexo.io/docs/configuration.html</a> for available settings. Here I would like to mention some important</p>
+<p> <strong>Site:</strong> </p>
+<p>Title, subtitle, description, author, language, timezone</p>
+<p> <strong>URL:</strong> </p>
+<p>url, root, permalink</p>
+<h1 id="How-About…-Start-Writing"><a href="#How-About…-Start-Writing" class="headerlink" title="How About… Start Writing?"></a>How About… Start Writing?</h1><p>No one will read an empty blog, right? So, let’s start writing! To create a new post or a new page, just run the command:</p>
+<pre><code>$ hexo new [layout] &lt;title&gt;
+</code></pre><p>There are three layouts available by default, namely <code>post</code> , <code>page</code> , and <code>draft</code> . If you don’t specify, <code>post</code> layout will be used.</p>
+<p>Also, remember to quote your title if it contains spaces or special characters!</p>
+<p>You may see that there is a special layout: <code>draft</code> . Posts initialized with this layout will not be displayed by default and you can use <code>publish</code> command to move drafts to post folder.</p>
+<p>After running the command, Hexo will build a new file based on the corresponding file in <code>scaffolds</code> file. Yes — you can add your own!</p>
+<p>By default, the generated filename will use the post title. If you want to have a different one, consider editing the setting <code>new_post_name</code> . For more information, please read <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">https://hexo.io/docs/writing.html</a> .</p>
+<h2 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h2><p>Hexo uses Markdown in the content. What is Markdown?</p>
+<blockquote><p>Markdown is a lightweight markup language with plain text formatting syntax. It is designed so that it can be converted to HTML and many other formats using a tool by the same name.</p>
+<footer><strong>Wikipedia [https://en.wikipedia.org/wiki/Markdown](https://en.wikipedia.org/wiki/Markdown) Markdown</strong></footer></blockquote>
+<p>It has a very simple but powerful syntax.</p>
+<pre><code># Heading
+
+## Sub-heading
+
+### Another deeper heading
+
+Paragraphs are separated
+by a blank line.
+
+Two spaces at the end of a line leave a 
+line break.
+
+Text attributes _italic_, *italic*, __bold__, **bold**, `monospace`.
+
+Horizontal rule:
+
+---
+
+Bullet list:
+
+ * apples
+ * oranges
+ * pears
+
+Numbered list:
+
+ 1. apples
+ 2. oranges
+ 3. pears
+
+A [link](http://example.com).
+</code></pre><h2 id="Tag-Plugins"><a href="#Tag-Plugins" class="headerlink" title="Tag Plugins"></a>Tag Plugins</h2><p>Hexo provides a useful way for you to quickly add specific content to the posts. For more infomation, please refer to <a href="https://hexo.io/docs/tag-plugins.html#Code-Block" target="_blank" rel="noopener">https://hexo.io/docs/tag-plugins.html</a> .</p>
+<h2 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h2><p>Each post has its own style. You can customize settings for each posts in front-matter. Front-matter is a block of YAML or JSON at the beginning of the file, terminated by three dashes when written in YAML or three semicolons when written in JSON.</p>
+<p>YAML:</p>
+<pre><code>title: Hello World
+date: 2013/7/13 20:46:25
+---
+</code></pre><p>JSON:</p>
+<pre><code>&quot;title&quot;: &quot;Hello World&quot;,
+&quot;date&quot;: &quot;2013/7/13 20:46:25&quot;
+;;;
+</code></pre><p>There are various settings available, like title, date, updated date, categories, and tags.</p>
+<p>Posts are supporting categories and tags. Please read <a href="https://hexo.io/docs/front-matter.html" target="_blank" rel="noopener">https://hexo.io/docs/front-matter.html</a> .</p>
+<h2 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h2><p>Want to insert some images? Hexo provides a different mechanism than Markdown itself. You may read <a href="https://hexo.io/docs/asset-folders.html" target="_blank" rel="noopener">https://hexo.io/docs/asset-folders.html</a> for more details.</p>
+<h1 id="Take-a-Look-At-The-Blog"><a href="#Take-a-Look-At-The-Blog" class="headerlink" title="Take a Look At The Blog"></a>Take a Look At The Blog</h1><p>OK now you have your owned writings. What about take a look of them? Hexo provides an optional module of server. To start using the server, you will first have to install hexo-server.</p>
+<pre><code>$ npm install hexo-server --save
+</code></pre><p>Remember to run it under the root of your blog. After installation, we can now run the server.</p>
+<pre><code>$ hexo server
+</code></pre><p>Your website will now run at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> by default. When the server is running, Hexo will watch for file changes and update automatically so it’s not necessary to manually restart the server.</p>
+<h1 id="Generate-A-Static-Site"><a href="#Generate-A-Static-Site" class="headerlink" title="Generate A Static Site"></a>Generate A Static Site</h1><p>Well, what if you don’t want to run another program to serve your website, instead of using Nginx to host static files? You can actually generate a static one! In Hexo, it can be done in a simple way.</p>
+<pre><code>$ hexo generate
+</code></pre><p>Then, everything you need is now under <code>public/</code> folder. Open <code>public/index.html</code> to see. So fantastic.</p>
+<h2 id="Watch-File-Changes"><a href="#Watch-File-Changes" class="headerlink" title="Watch File Changes"></a>Watch File Changes</h2><p>You know, it is very annoying to run the generator every time we change any file. Hexo can watch for file changes and regenerate files immediately by comparing the SHA1 checksum. Just run this:</p>
+<pre><code>$ hexo generate --watch
+</code></pre><p>No pain.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://xiaoxing.us/2017/11/18/From-0-to-1-Build-Your-Blog-using-Hexo/" data-id="cja5lynih0000ukfyg0ft2luy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/18/From-0-to-1-Build-Your-Blog-using-Hexo/">From 0 to 1: Build Your Blog using Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/18/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xiaoxing Ye<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
