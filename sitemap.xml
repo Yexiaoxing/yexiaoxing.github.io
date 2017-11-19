@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://xiaoxing.us/2017/11/19/From-0-to-1-Build-Your-Blog-using-Hexo/</loc>
+    <loc>https://xiaoxing.us/links/index.html</loc>
     
-    <lastmod>2017-11-19T16:35:30.563Z</lastmod>
+    <lastmod>2017-11-19T16:43:39.621Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://xiaoxing.us/about/index.html</loc>
     
-    <lastmod>2017-11-18T19:30:39.889Z</lastmod>
+    <lastmod>2017-11-19T16:43:18.202Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xiaoxing.us/2017/11/19/From-0-to-1-Build-Your-Blog-using-Hexo/</loc>
+    
+    <lastmod>2017-11-19T16:35:30.563Z</lastmod>
     
   </url>
   
