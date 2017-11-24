@@ -1,50 +1,245 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Xiaoxing Ye, ye@xiaoxing.us"><title>Deploy Mailman 3 on AWS Using Docker (In Progress) · Xiaoxing Ye's Farmland</title><meta name="description" content="Docker is now a hot topic, which is an open platform for developers and sysadmins to build, ship, and run distributed applications. It is good if you "><meta name="keywords" content="Blog, Shenzhen"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="https://www.googletagmanager.com/gtag/js?id=UA-40301850-2"></script><script><!-- hexo-inject:begin --><!-- hexo-inject:end -->window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="">
 
-gtag('config', 'UA-40301850-2');</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Xiaoxing Ye's Farmland</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="https://twitter.com/yexiaoxing"><i class="fa fa-twitter"></i></a></li><li><a href="http://github.com/yexiaoxing"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">About Me</a></li><li><a href="/archives">Archive</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h1><a>Deploy Mailman 3 on AWS Using Docker (In Progress)</a></h1></div><div class="post-content"><p>Docker is now a hot topic, which is an open platform for developers and sysadmins to build, ship, and run distributed applications. It is good if you want to isolate different app environments.</p>
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>Another topic today, Mailman, is a free software for managiing mailing list. It is a GNU project and it offers a good interface. In this article, I would like to introduce how to use Docker to deploy Mailman 3 on AWS, with Postfix and Amazon SES.</p>
+
+
+<!-- Head tag -->
+<head>
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    
+    <title>
+    
+        Deploy Mailman 3 on AWS Using Docker (In Progress) - 
+    
+    Xiaoxing Ye&#39;s Farmland
+    </title>
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="Xiaoxing Ye">
+    
+    
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    
+    
+    
+    
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>-->
+    
+    
+    <script src="/js/script.js" type="text/javascript" async></script>
+    
+    <!-- Global javascript config object -->
+    <script type="text/javascript">
+    var CONFIG = {
+    
+    
+    };
+    </script>
+    
+    
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showProcessingMessages: false,
+        jax: ["input/TeX","output/HTML-CSS", "output/PreviewHTML"], 
+        extensions: ["tex2jax.js", "fast-preview.js", "AssistiveMML.js" /*"MathMenu.js", "MathZoom.js", "[Contrib]/a11y/accessibility-menu.js"*/ ],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        }, 
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']], 
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+    });
+    </script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+    
+    
+
+    
+    
+    
+
+    
+
+</head>
+
+
+<body class="post">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav id="header">
+    <div class="container clearfix">
+        <div class="logo" style="width: auto;">
+            <a href="/" title="Xiaoxing Ye&#39;s Farmland" rel="home" style="text-decoration: none;">
+                
+                <span class="brand-logo">
+                    
+                    Xiaoxing Ye&#39;s Farmland
+                    
+                
+                </span>
+            </a>
+        </div>
+        <div id="global-nav">
+            <ul class="gnul">
+                <li class="gnli ">
+                    <a class="gna fa fa-home" href="/" title="Xiaoxing Ye&#39;s Farmland">
+                        <span class="gn-item">Home</span>
+                    </a>
+                </li>
+                
+                <li class="gnli dropdown current">
+                    <a class="gna fa fa-bars" href="#">
+                        <span class="gn-item">Navigation</span>
+                    </a>
+                    <div class="submenu">
+                        <div class="tab-content">
+                            <table>
+                                <tbody>
+                                    
+                                    <tr class="trline">
+                                        <td class="tdleft">Categories</td>
+                                        <td class="tdright">
+                                            <ul class="tab-categories">
+                                            
+                                                <li class="cat-item">
+                                                    <a href="/categories/Tutorials/">Tutorials</a>
+                                                </li>
+                                            
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="tdleft">Tags</td>
+                                        <td class="tdright">
+                                            <div class="tab-tags">
+                                                <a href="/tags/Tutorials/" style="font-size: 12px;">Tutorials</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/mailman/" style="font-size: 12px;">mailman</a> <a href="/tags/aws/" style="font-size: 12px;">aws</a> <a href="/tags/Installation/" style="font-size: 12px;">Installation</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </li>
+                
+                
+                <li class="gnli">
+                    <a class="gna fa fa-archive" href="/archives/index.html" title="">
+                        <span class="gn-item">Archive</span>
+                    </a>
+                </li>
+                
+                <li class="gnli">
+                    <a class="gna fa fa-user" href="/about/index.html" title="">
+                        <span class="gn-item">About Me</span>
+                    </a>
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+        
+
+    </div>
+</nav>
+
+    
+<main id="content">
+    <div class="container clearfix">
+        <div id="primary" >
+            <nav class="breadcrumb-navigation">
+                <a rel="bookmark" href="/">Home</a>
+                <span class="breadcrumb-arrow fa fa-angle-right"></span>
+                 
+Uncategorized
+
+                <span class="breadcrumb-arrow fa fa-angle-right"></span>
+                Deploy Mailman 3 on AWS Using Docker (In Progress)
+            </nav>
+            <article class="single-post">
+                <header class="post-header">
+                    <h1 class="post-title">
+                        <a href="/2017/11/24/Deploy-Mailman-3-on-AWS-using-Docker/" title="Deploy Mailman 3 on AWS Using Docker (In Progress)">Deploy Mailman 3 on AWS Using Docker (In Progress)</a>
+                    </h1>
+                </header>
+                <div class="post-meta">
+    <ul class="inline-ul">
+        <li class="inline-li">
+            <time>2017-11-24</time>
+        </li>
+        
+        
+    </ul>
+</div> 
+
+                <div class="post-body clearfix">
+                    <div class="post-content">
+                        
+                        <p>Docker is now a hot topic, which is an open platform for developers and sysadmins to build, ship, and run distributed applications. It is good if you want to isolate different app environments.</p>
+<p>Another topic today, Mailman, is a free software for managiing mailing list. It is a GNU project and it offers a good interface. In this article, I would like to introduce how to use Docker to deploy Mailman 3 on AWS, with Postfix and Amazon SES.</p>
 <p>In this tutorial, I will assume that you are using macOS or Linux, which has an embedded OpenSSH tool. If you are using Windows 10, you may use the Windows Subsystem for Linux. For more information on the subsystem, please refer to <a href="https://msdn.microsoft.com/en-us/commandline/wsl/install-win10" target="_blank" rel="noopener">MSDN - Windows 10 Installation Guide</a> .</p>
-<h1 id="Initialize-a-new-EC2-Instance"><a href="#Initialize-a-new-EC2-Instance" class="headerlink" title="Initialize a new EC2 Instance"></a>Initialize a new EC2 Instance</h1><p>Before we go into the EC2 part, there remains a question — why not Elastic Container Service? One simple answer is, we need to deploy images on one instance (to save resource). So, let’s get started.</p>
-<h2 id="Generate-a-SSH-Key"><a href="#Generate-a-SSH-Key" class="headerlink" title="Generate a SSH Key"></a>Generate a SSH Key</h2><p>First you need a SSH keys. By default, Amazon EC2 instances only allow user to log in using Key-Based Authentication. SSH keys provide an easy and secure way of logging into your server with only a pair of public/private keys.</p>
-<p>If you don’t have one, you may create one on your computer.</p>
+<h1>Initialize a new EC2 Instance</h1>
+<p>Before we go into the EC2 part, there remains a question — why not Elastic Container Service? One simple answer is, we need to deploy images on one instance (to save resource). So, let's get started.</p>
+<h2>Generate a SSH Key</h2>
+<p>First you need a SSH keys. By default, Amazon EC2 instances only allow user to log in using Key-Based Authentication. SSH keys provide an easy and secure way of logging into your server with only a pair of public/private keys.</p>
+<p>If you don't have one, you may create one on your computer.</p>
 <ol>
-<li><p>Run the command (replace the your_email@example.com with your main email address).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>When you’re prompted to “Enter a file in which to save the key,” press Enter. This accepts the default file location. Or you may choose your desired file location.</p>
-</li>
-<li>When you’re prompted to “Enter passphrase (empty for no passphrase)”, please enter one password you like. You need to remember the password since it is required to decrypt the secret key. You may leave it blank, though it will be a bit unsecure.</li>
+<li>Run the command (replace the your_email@example.com with your main email address).</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>When you're prompted to &quot;Enter a file in which to save the key,&quot; press Enter. This accepts the default file location. Or you may choose your desired file location.</li>
+<li>When you're prompted to &quot;Enter passphrase (empty for no passphrase)&quot;, please enter one password you like. You need to remember the password since it is required to decrypt the secret key. You may leave it blank, though it will be a bit unsecure.</li>
 </ol>
 <p><img src="https://static.notion-static.com/e0d490aea5114b298e1c48833f84c244/Untitled" alt=""></p>
-<h2 id="Add-the-New-SSH-Key-to-ssh-agent"><a href="#Add-the-New-SSH-Key-to-ssh-agent" class="headerlink" title="Add the New SSH Key to ssh-agent"></a>Add the New SSH Key to <code>ssh-agent</code></h2><p> <code>ssh-agent</code> is a program to hold private keys used for public key authentication (RSA, DSA). You may need to add your newly-generated key to <code>ssh-agent</code> , to make sure it will be used later. Here are the steps:</p>
+<h2>Add the New SSH Key to <code>ssh-agent</code></h2>
+<p><code>ssh-agent</code> is a program to hold private keys used for public key authentication (RSA, DSA). You may need to add your newly-generated key to <code>ssh-agent</code> , to make sure it will be used later. Here are the steps:</p>
 <ol>
-<li><p>Start a new agent process in the background.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>(For macOS Sierra / High Sierra users) You will need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line"> AddKeysToAgent yes</span><br><span class="line"> UseKeychain yes</span><br><span class="line"> IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Add your key to agent. Remember to replace ~/.ssh/id_rsa with where you place it.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -K ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-</li>
+<li>Start a new agent process in the background.</li>
 </ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>(For macOS Sierra / High Sierra users) You will need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line"> AddKeysToAgent yes</span><br><span class="line"> UseKeychain yes</span><br><span class="line"> IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>Add your key to agent. Remember to replace ~/.ssh/id_rsa with where you place it.</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -K ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://static.notion-static.com/24f9896a829e4949b945c650f5448939/Untitled" alt=""></p>
-<h2 id="Import-the-SSH-Key-on-Amazon-Platform"><a href="#Import-the-SSH-Key-on-Amazon-Platform" class="headerlink" title="Import the SSH Key on Amazon Platform"></a>Import the SSH Key on Amazon Platform</h2><p>Now you have your owned SSH keys, and you will need to import it so Amazon can recognize it.</p>
+<h2>Import the SSH Key on Amazon Platform</h2>
+<p>Now you have your owned SSH keys, and you will need to import it so Amazon can recognize it.</p>
 <p>Log into your <a href="https://console.aws.amazon.com/console/home" target="_blank" rel="noopener">AWS Console</a> , click the EC2 link to go to the <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2 Console</a> . Here you need to choose one of the available regions of EC2. Since I live in China, I choose the <em>Asia Pacific (Tokyo)</em> region for better speed. You may choose based on your visitor origins.</p>
 <p><img src="https://static.notion-static.com/34f50a4985ab47a5a93913ab9e1acf14/Untitled" alt=""></p>
-<p>Click Network &amp; Security - Key Pairs on left sidebar. You will see a “Import Key Pair” button on top. Here you may copy using <code>clipcopy</code> by</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;where_is_your_public_key.pub&gt; | clipcopy</span><br></pre></td></tr></table></figure>
+<p>Click Network &amp; Security - Key Pairs on left sidebar. You will see a &quot;Import Key Pair&quot; button on top. Here you may copy using <code>clipcopy</code> by</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;where_is_your_public_key.pub&gt; | clipcopy</span><br></pre></td></tr></table></figure></p>
 <p>You will need to paste it in the popup window on AWS console.</p>
-<h2 id="Launch-a-New-Instance"><a href="#Launch-a-New-Instance" class="headerlink" title="Launch a New Instance"></a>Launch a New Instance</h2><p>After you have imported the public key, go back to the Dashboard page. Then click the big blue button “ <em>Launch Instance</em> “.</p>
+<h2>Launch a New Instance</h2>
+<p>After you have imported the public key, go back to the Dashboard page. Then click the big blue button &quot; <em>Launch Instance</em> &quot;.</p>
 <p><img src="https://static.notion-static.com/0145cbc2e7624bbabcd4f28fbaac5835/Untitled" alt=""></p>
 <p>On the next page, you should choose an Amazon Machine Image (AMI) to run on the new EC2 Instance. An AMI is a template that contains the software configuration (operating system, application server, and applications) required to launch your instance. Here we will pick the Amazon Linux AMI, since it includes most we need.</p>
 <p><img src="https://static.notion-static.com/d20cdf36ad294eafaf395b20eb86b6e8/Untitled" alt=""></p>
-<p>Next, choose an Instance Type, which is a combination of CPU, memory, storage, and networking capacity. Here we choose the <code>t2.micro</code> which provides free tier, then click on the “Next: Configure Instance Details” button. <a href="https://aws.amazon.com/free/" target="_blank" rel="noopener">Learn more</a> about free usage.</p>
+<p>Next, choose an Instance Type, which is a combination of CPU, memory, storage, and networking capacity. Here we choose the <code>t2.micro</code> which provides free tier, then click on the &quot;Next: Configure Instance Details&quot; button. <a href="https://aws.amazon.com/free/" target="_blank" rel="noopener">Learn more</a> about free usage.</p>
 <p><img src="https://static.notion-static.com/cc011fef86b5453b971d1093fe036735/Untitled" alt=""></p>
-<p>Let’s keep the default settings of Instance Details and next. We use a 30 GB EBS since the free tier provides it:</p>
+<p>Let's keep the default settings of Instance Details and next. We use a 30 GB EBS since the free tier provides it:</p>
 <p><img src="https://static.notion-static.com/7cf66fd77d624de4a78b2ccb47786d48/Untitled" alt=""></p>
-<p>We don’t need a tag yet, so leave it blank and next to configure Security Group. A security group is a set of firewall rules that control the traffic for the instance.</p>
+<p>We don't need a tag yet, so leave it blank and next to configure Security Group. A security group is a set of firewall rules that control the traffic for the instance.</p>
 <p>Here you need to add some rules:</p>
 <ul>
 <li>Allow SSH (TCP 22) traffic from your IP address</li>
@@ -54,53 +249,195 @@ gtag('config', 'UA-40301850-2');</script><!-- hexo-inject:begin --><!-- hexo-inj
 <li>Allow port 8024 for LMTP (TCP 8024)</li>
 <li>Allow port 25 for SMTP (TCP 25)</li>
 </ul>
-<p>You can also give the new security group a fancy name, like “Mailman-Security-Group”. Then click “Review and Launch”.</p>
+<p>You can also give the new security group a fancy name, like &quot;Mailman-Security-Group&quot;. Then click &quot;Review and Launch&quot;.</p>
 <p><img src="https://static.notion-static.com/4004c447f653413c8c27c74cd6ded8a1/Untitled" alt=""></p>
-<p>In the Review page, you will see all the settings you have made before. Once you ensure they are ready, click “Launch” button. You will now be prompted of choosing your key pair. Still remember what we have done before? Choose that key, and Launch.</p>
+<p>In the Review page, you will see all the settings you have made before. Once you ensure they are ready, click &quot;Launch&quot; button. You will now be prompted of choosing your key pair. Still remember what we have done before? Choose that key, and Launch.</p>
 <p><img src="https://static.notion-static.com/5debc8cc967d454a9b5a7db651f9c964/Untitled" alt=""></p>
 <p>You can now view the instances and find your newly-created one after few-minute initialization.</p>
-<h2 id="Allocate-Elastic-IP"><a href="#Allocate-Elastic-IP" class="headerlink" title="Allocate Elastic IP"></a>Allocate Elastic IP</h2><p>An Elastic IP address is a static IP address designed for dynamic cloud computing. An Elastic IP address is associated with your AWS account. With an Elastic IP address, you can mask the failure of an instance or software by rapidly remapping the address to another instance in your account. Read more about EIPs <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html" target="_blank" rel="noopener">here</a> .</p>
+<h2>Allocate Elastic IP</h2>
+<p>An Elastic IP address is a static IP address designed for dynamic cloud computing. An Elastic IP address is associated with your AWS account. With an Elastic IP address, you can mask the failure of an instance or software by rapidly remapping the address to another instance in your account. Read more about EIPs <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html" target="_blank" rel="noopener">here</a> .</p>
 <p>In short, we need to ensure our mailing list service has minimal downtime. Once the instance is down, we may switch to another instance if needed. To do that, first go back to the EC2 Dashboard, and then choose Network &amp; Security - Elastic IPs.</p>
 <p><img src="https://static.notion-static.com/dc0f131dd4db4497865a25c687238ae9/Untitled" alt=""></p>
-<p>CLick “Allocate new address” button, then “Allocate”. You will now have a new IP. Remember it as <eip>.</eip></p>
+<p>CLick &quot;Allocate new address&quot; button, then &quot;Allocate&quot;. You will now have a new IP. Remember it as &lt;EIP&gt;.</p>
 <p>Then go back to Elastic IPs page. Choose the one you just get, then click Actions - Associate address.</p>
 <p><img src="https://static.notion-static.com/5946e9d77ae043c7952ae287a16d1939/Untitled" alt=""></p>
 <p>Here you need to associate the new IP to the new EC2 instance.</p>
 <p><img src="https://static.notion-static.com/508be3f14dc24ca79c8ea117938e3bf3/Untitled" alt=""></p>
-<h2 id="Try-to-Connect-to-the-Instance-amp-Update-the-System"><a href="#Try-to-Connect-to-the-Instance-amp-Update-the-System" class="headerlink" title="Try to Connect to the Instance &amp; Update the System"></a>Try to Connect to the Instance &amp; Update the System</h2><p>You now have your EC2 instance. Excited? Now let’s connect to the instance via SSH.</p>
+<h2>Try to Connect to the Instance &amp; Update the System</h2>
+<p>You now have your EC2 instance. Excited? Now let's connect to the instance via SSH.</p>
 <p>The default username of the image we used (remember? Amazon Linux) is <code>ec2-user</code> , so we can connect using</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh ec2-user@&lt;EIP&gt;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ssh ec2-user@&lt;EIP&gt;</span><br></pre></td></tr></table></figure></p>
 <p>You may be prompted to enter the password of your key. It is what you have set before. Forget the password? Go back to the most beginning of this article, and restart the works.</p>
-<p>You are now in control of a fully working Linux server. Let’s first update the system to ensure security.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo yum update -y</span><br></pre></td></tr></table></figure>
+<p>You are now in control of a fully working Linux server. Let's first update the system to ensure security.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo yum update -y</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://static.notion-static.com/66f1f55618bb430387771b8870be43bb/Untitled" alt=""></p>
-<h1 id="Install-Docker-on-the-Instance"><a href="#Install-Docker-on-the-Instance" class="headerlink" title="Install Docker on the Instance"></a>Install Docker on the Instance</h1><p>The next step is to install Docker on your EC2 Instance. Go back to the SSH session we opened before, enter:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo yum install -y docker</span><br><span class="line">&gt; sudo service docker start</span><br></pre></td></tr></table></figure>
+<h1>Install Docker on the Instance</h1>
+<p>The next step is to install Docker on your EC2 Instance. Go back to the SSH session we opened before, enter:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo yum install -y docker</span><br><span class="line">&gt; sudo service docker start</span><br></pre></td></tr></table></figure></p>
 <p>Next, add the <code>ec2-user</code> to the <code>docker</code> group so you can execute Docker commands without using sudo:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo usermod -a -G docker ec2-user</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo usermod -a -G docker ec2-user</span><br></pre></td></tr></table></figure></p>
 <p>You need to log out and log back to make it take effect. Enter <code>exit</code> to log out then log back with <code>ssh</code> . If nothing goes wrong, type <code>docker info</code> and it will return information about the Docker installation.</p>
 <p>Now we can test the Docker installation by running the <code>training/webapp</code> image:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:5000 training/webapp:latest python [app.py](http://app.py)</span><br></pre></td></tr></table></figure>
-<p>Copy the last line, which is the ID of the container. Try to visit http://<eip>, you should see a page saying “Hello World!”. If so, congratulations, and we now need to stop the container by:</eip></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm &lt;CONTAINER_ID&gt; -f</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:5000 training/webapp:latest python [app.py](http://app.py)</span><br></pre></td></tr></table></figure></p>
+<p>Copy the last line, which is the ID of the container. Try to visit http://&lt;EIP&gt;, you should see a page saying &quot;Hello World!&quot;. If so, congratulations, and we now need to stop the container by:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm &lt;CONTAINER_ID&gt; -f</span><br></pre></td></tr></table></figure></p>
 <p>After we have Docker ready, we need to install Docker Compose. Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Follow the steps:</p>
 <ol>
 <li>Check the newest Compose release number in the <a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">Compose repository release page on GitHub</a> . Up to Nov. 24, 2017, it was 1.17.1.</li>
-<li><p>Run this command to download the Docker Compose, replace <code>&lt;NEWEST_COMPOSE_RELEASE&gt;</code> with the version you get:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo curl -L https://github.com/docker/compose/releases/download/&lt;NEWEST_COMPOSE_RELEASE&gt;/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Add executable permissions to the binary:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Install command-line completion (Check here if you use zsh):</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo curl -L https://raw.githubusercontent.com/docker/compose/&lt;NEWEST_COMPOSE_RELEASE&gt;/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose</span><br><span class="line">&gt; <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Test the installation:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; docker-compose --version</span><br><span class="line">docker-compose version 1.17.1, build 6d101fb</span><br></pre></td></tr></table></figure>
-</li>
+<li>Run this command to download the Docker Compose, replace <code>&lt;NEWEST_COMPOSE_RELEASE&gt;</code> with the version you get:</li>
 </ol>
-<h1 id="Run-Mailman-Containers"><a href="#Run-Mailman-Containers" class="headerlink" title="Run Mailman Containers"></a>Run Mailman Containers</h1><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo curl -L https://github.com/docker/compose/releases/download/&lt;NEWEST_COMPOSE_RELEASE&gt;/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>Add executable permissions to the binary:</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li>Install command-line completion (Check here if you use zsh):</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo curl -L https://raw.githubusercontent.com/docker/compose/&lt;NEWEST_COMPOSE_RELEASE&gt;/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose</span><br><span class="line">&gt; <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>Test the installation:</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; docker-compose --version</span><br><span class="line">docker-compose version 1.17.1, build 6d101fb</span><br></pre></td></tr></table></figure></p>
+<h1>Run Mailman Containers</h1>
+<h1>References</h1>
+<ol>
 <li><a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac" target="_blank" rel="noopener">GitHub - Generating a new SSH key and adding it to the ssh-agent</a></li>
 <li><a href="https://asynchronous.in/docker-mailman/" target="_blank" rel="noopener">GNU Mailman 3 Deployment with Docker</a></li>
 </ol>
-</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-11-24</span><i class="fa fa-tag"></i><a href="/tags/Tutorials-docker-mailman-aws/" title="Tutorials, docker, mailman, aws" class="tag">Tutorials, docker, mailman, aws </a></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://xiaoxing.us/2017/11/24/Deploy-Mailman-3-on-AWS-using-Docker/,Xiaoxing Ye's Farmland,Deploy Mailman 3 on AWS Using Docker (In Progress),;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/11/19/From-0-to-1-Build-Your-Blog-using-Hexo/" title="From 0 to 1: Build Your Blog Using Hexo" class="btn">Next post</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
+
+                    </div>
+                </div>
+                
+
+<div class="license-notice">
+    <span>Author: </span>Xiaoxing Ye<br>
+    <span>Posted at: </span>2017-11-24<br>
+    <span>Updated at: </span>2017-11-25<br>
+    <span>Licensed under: </span>
+    
+    <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">
+    
+    BY-SA
+    
+    </a>
+    
+</div>
+
+                <nav class="post-tags">
+                
+                    
+                    <a href="/tags/Tutorials/" title="Tutorials" rel="tag" class="fa fa-tag">Tutorials</a>
+                    
+                    <a href="/tags/docker/" title="docker" rel="tag" class="fa fa-tag">docker</a>
+                    
+                    <a href="/tags/mailman/" title="mailman" rel="tag" class="fa fa-tag">mailman</a>
+                    
+                    <a href="/tags/aws/" title="aws" rel="tag" class="fa fa-tag">aws</a>
+                    
+                
+                </nav>
+            </article>
+        </div><!-- div#primary -->
+        <ul id="pager">
+
+    
+    <li class="next">
+        <a href="/2017/11/19/From-0-to-1-Build-Your-Blog-using-Hexo/" title="From 0 to 1: Build Your Blog Using Hexo" class="tooltipped tooltipped-n" aria-label="From 0 to 1: Build Your Blog Using Hexo">Next post <span class="fa fa-chevron-right"></span></a>
+    </li>
+    
+</ul>
+
+        
+<section id="comments">
+    
+</section>
+
+
+        
+    </div>
+</main>
+
+    <!-- Footer -->
+    
+<!-- #content -->
+<footer id="footer">
+    <div class="container">
+        <p>
+            <span class="cc-license">
+                <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" title="Creative Commons license by-sa">
+                <span class="cc cc-cc"></span>
+                
+                    <span class="cc cc-by"></span>
+                
+                    <span class="cc cc-sa"></span>
+                
+                </a>
+            </span>
+            &nbsp;2017-2017 Xiaoxing Ye&#39;s Farmland.
+        </p>
+        <p>Themed by <a href="https://github.com/unnamed42/hexo-theme-kunkka">Kunkka</a> | Powered by <a href="https://hexo.io/">Hexo</a>.</p>
+        
+
+
+<div class="sns-icons">
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+</div>
+
+
+    </div>
+</footer>
+<!-- #footer -->
+
+    <div id="totop" title="Back to top">
+    <canvas id="totop-canvas" width="48" height="48"></canvas>
+    <div id="totop-percent"></div>
+</div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>

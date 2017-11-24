@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xiaoxing.us/about/index.html</loc>
+    
+    <lastmod>2017-11-24T18:31:48.892Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xiaoxing.us/2017/11/24/Deploy-Mailman-3-on-AWS-using-Docker/</loc>
     
-    <lastmod>2017-11-24T17:53:34.755Z</lastmod>
+    <lastmod>2017-11-24T18:29:32.771Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://xiaoxing.us/links/index.html</loc>
     
     <lastmod>2017-11-19T16:43:39.621Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xiaoxing.us/about/index.html</loc>
-    
-    <lastmod>2017-11-19T16:43:18.202Z</lastmod>
     
   </url>
   
