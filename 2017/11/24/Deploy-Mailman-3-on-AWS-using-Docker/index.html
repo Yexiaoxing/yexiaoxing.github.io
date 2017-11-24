@@ -84,7 +84,25 @@ gtag('config', 'UA-40301850-2');</script><!-- hexo-inject:begin --><!-- hexo-inj
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:5000 training/webapp:latest python [app.py](http://app.py)</span><br></pre></td></tr></table></figure>
 <p>Copy the last line, which is the ID of the container. Try to visit http://<eip>, you should see a page saying “Hello World!”. If so, congratulations, and we now need to stop the container by:</eip></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm &lt;CONTAINER_ID&gt; -f</span><br></pre></td></tr></table></figure>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<p>After we have Docker ready, we need to install Docker Compose. Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Follow the steps:</p>
+<ol>
+<li>Check the newest Compose release number in the <a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">Compose repository release page on GitHub</a> . Up to Nov. 24, 2017, it was 1.17.1.</li>
+<li>Run this command to download the Docker Compose, replace <code>&lt;NEWEST_COMPOSE_RELEASE&gt;</code> with the version you get:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo curl -L https://github.com/docker/compose/releases/download/&lt;NEWEST_COMPOSE_RELEASE&gt;/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Add executable permissions to the binary:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Install command-line completion (Check here if you use zsh):</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo curl -L https://raw.githubusercontent.com/docker/compose/&lt;NEWEST_COMPOSE_RELEASE&gt;/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose</span><br><span class="line">&gt; <span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Test the installation:</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; docker-compose --version</span><br><span class="line">docker-compose version 1.17.1, build 6d101fb</span><br></pre></td></tr></table></figure>
+<h1 id="Run-Mailman-Containers"><a href="#Run-Mailman-Containers" class="headerlink" title="Run Mailman Containers"></a>Run Mailman Containers</h1><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
 <li><a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac" target="_blank" rel="noopener">GitHub - Generating a new SSH key and adding it to the ssh-agent</a></li>
 <li><a href="https://asynchronous.in/docker-mailman/" target="_blank" rel="noopener">GNU Mailman 3 Deployment with Docker</a></li>
 </ol>
