@@ -332,7 +332,7 @@ Uncategorized
 <p>To use Postfix, you need to first remove sendmail and install postfix.</p>
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo yum remove sendmail -y</span><br><span class="line">&gt; sudo yum install postfix -y</span><br></pre></td></tr></table></figure></p>
 <p>Then, edit the postfix main config file <code>/etc/postfix/main.cf</code> using any editor you like (for example, <code>nano</code> ). Add the following lines to the end of the file. Remember to replace email-smtp.us-west-1.amazonaws.com in the example above with the SMTP server name shown before.</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">relayhost = [email-smtp.us-east-1.amazonaws.com]:587</span><br><span class="line">smtp_sasl_auth_enable = yes</span><br><span class="line">smtp_sasl_security_options = noanonymous</span><br><span class="line">smtp_sasl_password_maps = <span class="built_in">hash</span>:/etc/postfix/sasl_passwd</span><br><span class="line">smtp_use_tls = yes</span><br><span class="line">smtp_tls_security_level = encrypt</span><br><span class="line">smtp_tls_note_starttls_offer = yes</span><br><span class="line">inet_protocols = ipv4</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">relayhost = [email-smtp.us-east-1.amazonaws.com]:587</span><br><span class="line">smtp_sasl_auth_enable = yes</span><br><span class="line">smtp_sasl_security_options = noanonymous</span><br><span class="line">smtp_sasl_password_maps = <span class="built_in">hash</span>:/etc/postfix/sasl_passwd</span><br><span class="line">smtp_use_tls = yes</span><br><span class="line">smtp_tls_security_level = encrypt</span><br><span class="line">smtp_tls_note_starttls_offer = yes</span><br><span class="line">inet_protocols = ipv4</span><br><span class="line">inet_interfaces = localhost, 172.19.199.1</span><br></pre></td></tr></table></figure></p>
 <p>Now, open the master.cf file.</p>
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo nano /etc/postfix/master.cf</span><br></pre></td></tr></table></figure></p>
 <p>Locate the following line <code>-o smtp_fallback_relay=</code> and comment it (by placing a # (hash) character at the beginning). Save and close it.</p>
@@ -457,7 +457,7 @@ Uncategorized
 <div class="license-notice">
     <span>Author: </span>Xiaoxing Ye<br>
     <span>Posted at: </span>2017-11-24<br>
-    <span>Updated at: </span>2017-11-26<br>
+    <span>Updated at: </span>2017-12-03<br>
     <span>Licensed under: </span>
     
     <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">
