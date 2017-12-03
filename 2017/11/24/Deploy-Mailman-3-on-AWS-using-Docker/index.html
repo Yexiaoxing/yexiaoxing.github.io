@@ -127,7 +127,7 @@
                                         <td class="tdleft">Tags</td>
                                         <td class="tdright">
                                             <div class="tab-tags">
-                                                <a href="/tags/Tutorials/" style="font-size: 12px;">Tutorials</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/mailman/" style="font-size: 12px;">mailman</a> <a href="/tags/aws/" style="font-size: 12px;">aws</a> <a href="/tags/Installation/" style="font-size: 12px;">Installation</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a>
+                                                <a href="/tags/Installation/" style="font-size: 12px;">Installation</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Tutorials/" style="font-size: 12px;">Tutorials</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/mailman/" style="font-size: 12px;">mailman</a> <a href="/tags/aws/" style="font-size: 12px;">aws</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -278,9 +278,9 @@ Uncategorized
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo usermod -a -G docker ec2-user</span><br></pre></td></tr></table></figure></p>
 <p>You need to log out and log back to make it take effect. Enter <code>exit</code> to log out then log back with <code>ssh</code> . If nothing goes wrong, type <code>docker info</code> and it will return information about the Docker installation.</p>
 <p>Now we can test the Docker installation by running the <code>training/webapp</code> image:</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:5000 training/webapp:latest python [app.py](http://app.py)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; docker run -d -p 80:5000 training/webapp:latest python [app.py](http://app.py)</span><br></pre></td></tr></table></figure></p>
 <p>Copy the last line, which is the ID of the container. Try to visit http://&lt;EIP&gt;, you should see a page saying &quot;Hello World!&quot;. If so, congratulations, and we now need to stop the container by:</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm &lt;CONTAINER_ID&gt; -f</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; docker rm &lt;CONTAINER_ID&gt; -f</span><br></pre></td></tr></table></figure></p>
 <p>After we have Docker ready, we need to install Docker Compose. Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Follow the steps:</p>
 <ol>
 <li>Check the newest Compose release number in the <a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">Compose repository release page on GitHub</a> . Up to Nov. 24, 2017, it was 1.17.1.</li>
@@ -355,7 +355,7 @@ Uncategorized
 <h1>Getting Ready for Containers</h1>
 <p>GNU Mailman 3 is actually a suite of softwares, including Mailman Core, Mailman Client, Postorius, and Hyperkitty. The normal installation is very complicated (I tried before. See my repo <a href="https://github.com/Yexiaoxing/mailman-on-aws" target="_blank" rel="noopener">here</a> ). But luckily, we can use Docker. Abhilash Raj maintains container images for Mailman 3, which you can use directly without having to go through all the steps to download dependencies and configuring Mailman.</p>
 <p>To run the containers, we first need to clone the docker-mailman repo, which contains all docker compose files we need.</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; git <span class="built_in">clone</span> [https://github.com/maxking/docker-mailman](https://github.com/maxking/docker-mailman) &amp;&amp; <span class="built_in">cd</span> docker-mailman</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; git <span class="built_in">clone</span> https://github.com/maxking/docker-mailman &amp;&amp; <span class="built_in">cd</span> docker-mailman</span><br></pre></td></tr></table></figure></p>
 <p>The default compose file do these things:</p>
 <ul>
 <li>Run a wsgi server using  <code>[uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/)</code>  for the Mailman's Django based web frontend listening on  <a href="http://172.19.199.3:8000/" target="_blank" rel="noopener">http://172.19.199.3:8000/</a> . It will run 2 worker processes with 4 threads each.</li>
