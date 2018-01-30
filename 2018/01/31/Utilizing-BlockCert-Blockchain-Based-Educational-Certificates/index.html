@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="">
+
+
+
+<!-- Head tag -->
+<head>
+    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+
+    <title>
+    
+        Utilizing BlockCert - Blockchain-Based Educational Certificates -
+    
+    Xiaoxing Ye&#39;s Farmland
+    </title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="Xiaoxing Ye">
+
+    
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    
+
+    
+
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>-->
+    
+
+    <script src="/js/script.js" type="text/javascript" async></script>
+
+    <!-- Global javascript config object -->
+    <script type="text/javascript">
+    var CONFIG = {
+    
+    
+    };
+    </script>
+
+    
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showProcessingMessages: false,
+        jax: ["input/TeX","output/HTML-CSS", "output/PreviewHTML"],
+        extensions: ["tex2jax.js", "fast-preview.js", "AssistiveMML.js" /*"MathMenu.js", "MathZoom.js", "[Contrib]/a11y/accessibility-menu.js"*/ ],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+        },
+        tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+    });
+    </script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js" async></script>
+    
+    
+
+
+    
+
+    
+
+    
+
+
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-40301850-2" ></script>
+
+    <script type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-40301850-2');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+
+<body class="post">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav id="header">
+    <div class="container clearfix">
+        <div class="logo" style="width: auto;">
+            <a href="/" title="Xiaoxing Ye&#39;s Farmland" rel="home" style="text-decoration: none;">
+                
+                <span class="brand-logo">
+                    
+                    Xiaoxing Ye&#39;s Farmland
+                    
+                
+                </span>
+            </a>
+        </div>
+        <div id="global-nav">
+            <ul class="gnul">
+                <li class="gnli ">
+                    <a class="gna fa fa-home" href="/" title="Xiaoxing Ye&#39;s Farmland">
+                        <span class="gn-item">Home</span>
+                    </a>
+                </li>
+                
+                <li class="gnli dropdown current">
+                    <a class="gna fa fa-bars" href="#">
+                        <span class="gn-item">Navigation</span>
+                    </a>
+                    <div class="submenu">
+                        <div class="tab-content">
+                            <table>
+                                <tbody>
+                                    
+                                    <tr class="trline">
+                                        <td class="tdleft">Categories</td>
+                                        <td class="tdright">
+                                            <ul class="tab-categories">
+                                            
+                                                <li class="cat-item">
+                                                    <a href="/categories/Diary/">Diary</a>
+                                                </li>
+                                            
+                                                <li class="cat-item">
+                                                    <a href="/categories/Tutorials/">Tutorials</a>
+                                                </li>
+                                            
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="tdleft">Tags</td>
+                                        <td class="tdright">
+                                            <div class="tab-tags">
+                                                <a href="/tags/Tutorials/" style="font-size: 12px;">Tutorials</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/mailman/" style="font-size: 12px;">mailman</a> <a href="/tags/aws/" style="font-size: 12px;">aws</a> <a href="/tags/Installation/" style="font-size: 12px;">Installation</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Diary/" style="font-size: 12px;">Diary</a> <a href="/tags/Random-Thoughts/" style="font-size: 12px;">Random Thoughts</a> <a href="/tags/blockcerts/" style="font-size: 12px;">blockcerts</a> <a href="/tags/blockchain/" style="font-size: 12px;">blockchain</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </li>
+                
+                
+                <li class="gnli">
+                    <a class="gna fa fa-archive" href="/archives/index.html" title="">
+                        <span class="gn-item">Archive</span>
+                    </a>
+                </li>
+                
+                <li class="gnli">
+                    <a class="gna fa fa-user" href="/about/index.html" title="">
+                        <span class="gn-item">About Me</span>
+                    </a>
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+        
+
+    </div>
+</nav>
+
+    
+<main id="content">
+    <div class="container clearfix">
+        <div id="primary" >
+            <nav class="breadcrumb-navigation">
+                <a rel="bookmark" href="/">Home</a>
+                <span class="breadcrumb-arrow fa fa-angle-right"></span>
+                 
+<a href="/categories/Tutorials/" title="Tutorials" rel="category tag">Tutorials</a>
+
+                <span class="breadcrumb-arrow fa fa-angle-right"></span>
+                Utilizing BlockCert - Blockchain-Based Educational Certificates
+            </nav>
+            <article class="single-post">
+                <header class="post-header">
+                    <h1 class="post-title">
+                        <a href="/2018/01/31/Utilizing-BlockCert-Blockchain-Based-Educational-Certificates/" title="Utilizing BlockCert - Blockchain-Based Educational Certificates">Utilizing BlockCert - Blockchain-Based Educational Certificates</a>
+                    </h1>
+                </header>
+                <div class="post-meta">
+    <ul class="inline-ul">
+        <li class="inline-li">
+            <time>2018-01-31</time>
+        </li>
+        
+        <li class="inline-li">
+            <span class="post-span">·</span>
+        </li>
+        <li class="inline-li">
+             
+<a href="/categories/Tutorials/" title="Tutorials" rel="category tag">Tutorials</a>
+
+        </li>
+        
+        
+    </ul>
+</div> 
+
+                <div class="post-body clearfix">
+                    <div class="post-content">
+                        
+                        <p>Imagine that, one day you graduate from CUHK-Shenzhen and you don't receive a paper diploma. While you are complaining it to your friend, saying that &quot;the University is too stingy to give a single paper&quot;, you receive an email, with title &quot;Your Digital Diploma&quot;. With curiosity, you open the email and it says, &quot;Welcome to digital world. Attached is your e-diploma, and you can print it yourself&quot;. Uh-huh, e-diploma? Sounds to be cool.</p>
+<p>Recently, blockchain has become a hit topic, especially on cryptocurrencies. Someone says that it redefines &quot;Trust&quot; since using blockchain you no longer need to trust <strong>anyone</strong> but algorithm. What if it can be used to issue diplomas? But there is a sad story — the Massachusetts Institute of Technology, yes the MIT, has already announced that it will issue diplomas to around one hundred graduates utilizing the bitcoin. Failed to be the first in the world, what about let CUHK-Shenzhen be the first in Asia? It sounds to be a good idea.</p>
+<p>Before we can issue CUHK-Shenzhen diplomas, let's try to walk through the process. Luckily, MIT Media Lab open-sourced the whole toolkits so we can try.</p>
+<h1>Before we go on...</h1>
+<p>Before talking about BlockCert, we need to know some basic knowledges...</p>
+<ul>
+<li>Markle Tree</li>
+<li>Blockchain</li>
+<li>Digital Certificates (what and why)</li>
+</ul>
+<h2>What is Markle Tree?</h2>
+<p>(To be written)</p>
+<p><a href="http://www.cnblogs.com/fengzhiwu/p/5524324.html" target="_blank" rel="noopener">http://www.cnblogs.com/fengzhiwu/p/5524324.html</a></p>
+<h2>What is Blockchain?</h2>
+<p>TL;DR: Blockchain stores all information and once info is kept it is signed and permantly stored. No one can modify or delete any information.</p>
+<p>Blockchain is like a huge, global, and decentralized spreadsheet, keeping a track of who sent how many coins to whom, and what the balance of every account is. All people (miners) in the network stores and maintain the blockchain. When you check the information like transaction or personal balance, it reads data on the blockchain, not in any personal systems.</p>
+<h2>What is digital certificates?</h2>
+<p>The digital certificate is a digital document that validates the participation of a user in any activities defined. The digital certificate is characterized by storing all the relevant information of the certificate so that it can be verified by means of encryption methods.</p>
+<h2>Why digital certificates?</h2>
+<p><strong>It is transparent:</strong> The digital certificate has the ability to be verified without the need to contact directly the institution that issues it, because it can verify the transaction and the identities of the participants (issuer and recipient of the certificate) since this information is public.</p>
+<p><strong>It is safe:</strong> On the other hand, while the transaction is public, the content of the certificate and the personal information of the sender and receiver is private.</p>
+<h1>Let's Get Started!</h1>
+<p><img src="https://static.notion-static.com/62c70d8c-e27f-4bf6-beb1-084452ab54ec/0_LcgQy9J55lxVbGIU.png" alt=""></p>
+<p>Overview of our digital certification architecture (Source: <a href="https://medium.com/mit-media-lab/what-we-learned-from-designing-an-academic-certificates-system-on-the-blockchain-34ba5874f196" target="_blank" rel="noopener">https://medium.com/mit-media-lab/what-we-learned-from-designing-an-academic-certificates-system-on-the-blockchain-34ba5874f196</a>)</p>
+<p>The toolkits consist of three parts:</p>
+<ul>
+<li><a href="https://github.com/digital-certificates/cert-schema" target="_blank" rel="noopener">cert-schema</a>:  The data standard for digital certificates. The schema is actually an extension of <a href="https://www.imsglobal.org/sites/default/files/Badges/OBv2p0/index.html" target="_blank" rel="noopener">Open Badges</a>. A digital certificate is essentially a JSON file.</li>
+<li><a href="https://github.com/digital-certificates/cert-issuer" target="_blank" rel="noopener">cert-issuer</a>: It takes a JSON certificate, creates a hash to identify the certificate, and issues the certificate by broadcasting a transation (Bitcoin or Ethereum) from the issuing institution's address to a recipient's address, with the bash embedded within the transaction data field.</li>
+<li><a href="https://github.com/digital-certificates/cert-viewer" target="_blank" rel="noopener">cert-viewer</a>: A flask demo to display and verify digital certificates after been issued. It also provides the ability for users to request certificates and to generate a new Bitcoin identity.</li>
+</ul>
+<p>In this tutorial, we will talk about the second part — cert-issuer. We will not work on a real institution, since we are only to get a sense of it. And, we will use Ropsten Ethereum testnet, for the reason that we are poor to get real cryptocurrencies (just a joke).</p>
+<h2>Get the source code and Install required packages</h2>
+<p>You are highly recommended to use virtualenv.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/blockchain-certificates/cert-issuer.git &amp;&amp; <span class="built_in">cd</span> cert-issuer</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://static.notion-static.com/5752641d-8103-4b84-9fbb-a346537e18e6/Untitled" alt=""></p>
+<p>You are expected to... fail. That's because there are two conflicting libraries in the project. Merkletools requires “exactly” pysha3 1.01b, while cert-tools require pysha3 1.0.2 or greater. To solve the problem, go to the site-packages folder:</p>
+<p><img src="https://static.notion-static.com/b67489b9-2374-4e7c-bd4a-d2538c8be581/Untitled" alt=""></p>
+<p>The folder after &quot;Installed&quot; is what we need. Then enter &quot;merkletools-1.0.2-py3.6.egg&quot; folder, edit the METADATA and replace &quot;pysha3 (==1.0b1)&quot; to <code>pysha3 (&gt;=1.0b1)</code> then save. You need to do the same thing on metadata.json file.</p>
+<p>If you don't see these files, edit the one in <code>/merkletools-1.0.2-py3.6.egg/EGG-INFO/requires.txt</code> .</p>
+<p>Go back to the cert-issuer folder and re-run</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></p>
+<p>Everything should be fine now.</p>
+<h2>Create an Ethereum issuing address</h2>
+<p>In Ethereum a public/private key pair is the same accross all test/main networks. So, we don't need to have anew key pair if later we want it to run on main network (the one we will use real USD).</p>
+<p>To create a new wallet, we can use a local wallet</p>
+<p>First, go to <a href="https://www.myetherwallet.com/" target="_blank" rel="noopener">https://www.myetherwallet.com/</a>. If you plan to go further to production part, turn off your Internet connection when you are already on the create wallet page.</p>
+<p><img src="https://static.notion-static.com/b30e1b9b-2eed-48a8-b355-f99d9011b15a/Untitled" alt=""></p>
+<p>Do you see the big input box? Yes, enter your desired password for your wallet. Write it down somewhere and save it, otherwise you will lose your funds.</p>
+<p><img src="https://static.notion-static.com/1e6bc4ad-0f45-4df5-8218-8e919388049e/Untitled" alt=""></p>
+<p>Then, you will be required to download a Keystore file. Read the instruction carefully, and, save it. After clicking Continue, you will see your private key.</p>
+<p><img src="https://static.notion-static.com/2e36671c-8d23-4a04-af29-0a8938153786/Untitled" alt=""></p>
+<p>Of course, I won't let you see it. Copy the private key. You should print a paper wallet (or save as PDF). The paper wallet looks like...</p>
+<p><img src="https://static.notion-static.com/64164e20-4c04-4e4f-a1a3-e06b772d67ed/Untitled" alt=""></p>
+<p>Yes, like a air ticket. Click the &quot;Save Your Address&quot; to continue. In next page, we will need to read the public key (known as Account # or Address). It is what you will use and share with people later. Find the colorful address icon. Make sure it matches your paper wallet &amp; whenever you enter your address somewhere.</p>
+<p><img src="https://static.notion-static.com/f3b7cf20-4602-4996-9f44-10701dfb8668/Untitled" alt=""></p>
+<p>You may use the Keystore file or your Private Key to continue. Enter the wallet password. What? You forget it? Regenerate your wallet and remember the password.</p>
+<p><img src="https://static.notion-static.com/60c0929a-8fff-4d30-a5d8-e0ecb426cbfd/Untitled" alt=""></p>
+<p>Here you will get your public address. Copy it and save for later use. (DON'T send ETH to this account. I already delete the private key.)</p>
+<h2>Get some coins</h2>
+<p>Before we can issue certificates, we need to have sufficient funds to cover the transaction fee. Why transaction fee? It is paid to miners for their work. The current fee is 0.00008 ETH (Well, only 0.082 dollars. Not a big deal). But remember? We are poor and we are on testnet, so why paying money? We can get some free coins from the network. You can request test coins by searching for &quot;Testnet Faucet&quot;, and entering your issuing public address.</p>
+<p>To ease your burden, I have gotten one for you: <a href="http://faucet.ropsten.be:3001/" target="_blank" rel="noopener">http://faucet.ropsten.be:3001/</a>. Enter your public key and click &quot;Send me 3 test ether!&quot;.</p>
+<p><img src="https://static.notion-static.com/7ba975a4-2448-4a50-85eb-519778d420f8/Untitled" alt=""></p>
+<p>Then, after a few minutes, check the network to see if you get the money here: https://ropsten.etherscan.io/address/&lt;Your Public Key&gt;.</p>
+<p><img src="https://static.notion-static.com/63caf01a-45cb-45fa-88d3-d8d4cd082b0a/Untitled" alt=""></p>
+<p>See the ETH Balance, it is 3 ETH. Cool, we are rich now (daydreaming).</p>
+<h2>Configuring cert-issuer</h2>
+<p>It is time to configure the instance. But wait, you need to save you private key to somewhere. It is recommended to store the private key on a USB stick and unplug it when not used. But to save time plugging in and out, we will save the private key locally. For example, <code>/Users/xiaoxing/Projects/blockchain-certificates/ethereum</code> folder and <code>pk</code>  file.</p>
+<p>Then, you should see a <code>conf_ethtest.ini</code>  under the <code>cert-issuer</code>  root folder. Open it using any of your favourite editor. Fill in the issuing_address, choose ethereum_ropsten as the blockchain, enter the usb_name and key_file as the private key storage location, and set the three dirs. An example is given here: <a href="https://gist.github.com/Yexiaoxing/74a55d49fbfd5275b698a9ad6f71c9d3" target="_blank" rel="noopener">https://gist.github.com/Yexiaoxing/74a55d49fbfd5275b698a9ad6f71c9d3</a>. Remember to rename the config to conf.ini.</p>
+<h2>Issuing</h2>
+<p>Run <code>cert-issuer -c conf.ini</code>  to see if everything is working.</p>
+<p>You will see &quot;No certificates to process&quot; in the output. It is correct since we have not put any certificates. Let's do it.</p>
+<p>To save some time, we can use the sample certs:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./examples/data-testnet/unsigned_certificates/* ./data/unsigned_certificates</span><br></pre></td></tr></table></figure></p>
+<p>Here you need to edit the unsigned certificates, replace &quot;msBCHdwaQ7N2ypBYupkp6uNxtr9Pg76imj&quot; with your public key.</p>
+<p>Then, you need to find a place to host your issuer profile. What is issuer profile? From <a href="https://www.imsglobal.org/sites/default/files/Badges/OBv2p0/index.html#Profile" target="_blank" rel="noopener">Open Badges</a>, a Profile is a collection of information that describes the entity or organization using Open Badges. The main usage is to verify the cert is issued from proved person. Since we are using our owned public key, we need to host the profile file by ourselves.</p>
+<p>Blockcerts itself provides two samples, one is issuer profile and another one is revocation list. First we need to download the two files.</p>
+<ul>
+<li><a href="https://www.blockcerts.org/samples/2.0/issuer-testnet.json" target="_blank" rel="noopener">https://www.blockcerts.org/samples/2.0/issuer-testnet.json</a></li>
+<li><a href="https://www.blockcerts.org/samples/2.0/revocation-list-testnet.json" target="_blank" rel="noopener">https://www.blockcerts.org/samples/2.0/revocation-list-testnet.json</a></li>
+</ul>
+<p>Then, open the two files, and you will see a compressed json. What you need to do is first replace &quot;msBCHdwaQ7N2ypBYupkp6uNxtr9Pg76imj&quot; with your public key in issuer-testnet.json file, and upload it to somewhere, like GitHub, where you need to get a stable link for direct download. Then, replace the links in the two json files with the correct one.</p>
+<p>It is hard to explain in language... You may check my examples here: <a href="https://github.com/Yexiaoxing/blockcerts-trial" target="_blank" rel="noopener">https://github.com/Yexiaoxing/blockcerts-trial</a> . You will also need to change the links in the sample cert.</p>
+<p><s>Then, re-run again. You are... yes, expected to fail again. This time you need to modify <code>site-packages/cert_issuer-2.0.11-py3.6.egg/cert_issuer/ethereum/connectors.py</code>  and add one more argument to the last <code>get_providers_for_chain</code>  function, like:</s></p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_providers_for_chain</span><span class="params">(chain, local_node=False)</span>:</span></span><br></pre></td></tr></table></figure></p>
+<p>Update: You are no longer needed to do this modification since the repo has accepted my PR.</p>
+<p>Then, run again and you should get the result:</p>
+<p><img src="https://static.notion-static.com/8d0d0bb8-0aae-4c7b-b087-b80510136141/Untitled" alt=""></p>
+<p>Read the debug infos, it is useful. You will find a string of txid, which is your transaction ID (highlighted in the screenshot). Now you can check this transaction using Etherscan (https://ropsten.etherscan.io). An example is given here: <a href="https://ropsten.etherscan.io/tx/0x58c8baddc01711c4c35f2ca177ff93994c9c521e5c46e440f907ef145ceddd5b" target="_blank" rel="noopener">https://ropsten.etherscan.io/tx/0x58c8baddc01711c4c35f2ca177ff93994c9c521e5c46e440f907ef145ceddd5b</a>.</p>
+<p>Now you get a blockchain-baked certificate under data/blockchain_certificates. But how to verify it?</p>
+<h2>Verify the certificate</h2>
+<p>First, you need to clone the cert_verifier repo by:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> [https://github.com/blockchain-certificates/cert-verifier.git](https://github.com/blockchain-certificates/cert-verifier.git) &amp;&amp; <span class="built_in">cd</span> cert-verifier</span><br></pre></td></tr></table></figure></p>
+<p>Then, remember that you have a new certificate? Copy to the verifier folder, and run the verifier by</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python cert_verifier/verifier.py &lt;filename&gt;</span><br></pre></td></tr></table></figure></p>
+<p>If your certificate is true, you will see some &quot;passed&quot; without &quot;failed&quot;.</p>
+<p><img src="https://static.notion-static.com/e6dd98ca-77e1-4565-bcc6-e0226b11ed01/Untitled" alt=""></p>
+<h2>Host a Certificate Viewer</h2>
+<p>What if you want to show your certificate to others? It is not a good idea to share... json file, right? The MIT project has provided a Flask app to display and verify blockchain certificates.</p>
+<p>First, you need to clone the app:</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> [https://github.com/blockchain-certificates/cert-viewer.git](https://github.com/blockchain-certificates/cert-viewer.git) &amp;&amp; <span class="built_in">cd</span> cert-viewer</span><br></pre></td></tr></table></figure></p>
+<p>Then, before you can use the app, you need to modify some config. Make a copy of conf_template.ini and name it as conf.ini. Follow the instructions here: <a href="https://github.com/blockchain-certificates/cert-viewer/#configuration" target="_blank" rel="noopener">https://github.com/blockchain-certificates/cert-viewer/#configuration</a>.</p>
+<p>After you finished the configure, install the required packages by</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install .</span><br></pre></td></tr></table></figure></p>
+<p>Remember to copy the signed cert to cert_data/. Then run the app <code>python [run.py](http://run.py/) -c conf.ini</code>. And, visit the site using your favorite website, click on one of the recent cert and verify.</p>
+<p>Well, unfortunately, cert-viewer isn't support ethernet yet. So you will not be able to view your newly signed cert. But, you can get a sense by viewing the sample certs.</p>
+<h1>Other Resources</h1>
+<p>If you want to put this into production (though, I don't recommend), you can download some tools here: <a href="https://github.com/blockchain-certificates/cert-tools" target="_blank" rel="noopener">https://github.com/blockchain-certificates/cert-tools</a>. You can create your owned certificate template and instantiate certificate batch.</p>
+<p>If you want to learn more about it, you can read the cert schema, which is based on Open Badges: <a href="https://github.com/blockchain-certificates/cert-schema" target="_blank" rel="noopener">https://github.com/blockchain-certificates/cert-schema</a></p>
+
+                    </div>
+                </div>
+                
+
+<div class="license-notice">
+    <span>Author: </span>Xiaoxing Ye<br>
+    <span>Posted at: </span>2018-01-31<br>
+    <span>Updated at: </span>2018-01-31<br>
+    <span>Licensed under: </span>
+    
+    <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">
+    
+    BY-SA
+    
+    </a>
+    
+</div>
+
+                <nav class="post-tags">
+                
+                    
+                    <a href="/tags/Tutorials/" title="Tutorials" rel="tag" class="fa fa-tag">Tutorials</a>
+                    
+                    <a href="/tags/blockcerts/" title="blockcerts" rel="tag" class="fa fa-tag">blockcerts</a>
+                    
+                    <a href="/tags/blockchain/" title="blockchain" rel="tag" class="fa fa-tag">blockchain</a>
+                    
+                
+                </nav>
+            </article>
+        </div><!-- div#primary -->
+        <ul id="pager">
+
+    
+    <li class="next">
+        <a href="/2018/01/02/Happy-New-Year/" title="Happy New Year!" class="tooltipped tooltipped-n" aria-label="Happy New Year!">Next post <span class="fa fa-chevron-right"></span></a>
+    </li>
+    
+</ul>
+
+        
+<section id="comments">
+    
+</section>
+
+
+        
+    </div>
+</main>
+
+    <!-- Footer -->
+    
+<!-- #content -->
+<footer id="footer">
+    <div class="container">
+        <p>
+            <span class="cc-license">
+                <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" title="Creative Commons license by-sa">
+                <span class="cc cc-cc"></span>
+                
+                    <span class="cc cc-by"></span>
+                
+                    <span class="cc cc-sa"></span>
+                
+                </a>
+            </span>
+            &nbsp;2017-2018 Xiaoxing Ye&#39;s Farmland.
+        </p>
+        <p>Themed by <a href="https://github.com/unnamed42/hexo-theme-kunkka">Kunkka</a> | Powered by <a href="https://hexo.io/">Hexo</a>.</p>
+        
+
+
+<div class="sns-icons">
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+</div>
+
+
+    </div>
+</footer>
+<!-- #footer -->
+
+    <div id="totop" title="Back to top">
+    <canvas id="totop-canvas" width="48" height="48"></canvas>
+    <div id="totop-percent"></div>
+</div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.2/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>
